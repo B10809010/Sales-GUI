@@ -4,7 +4,7 @@
       `inline-flex items-center justify-center
       font-medium whitespace-nowrap rounded-md 
       transition-all cursor-pointer *:cursor-pointer
-      focus:ring-2 focus:ring-offset-2 focus:ring-slate-300
+      focus:ring-2 focus:ring-offset-0 focus:ring-slate-300
       disabled:pointer-events-none`,
       sizes[size],
       variants[variant][color],
@@ -21,7 +21,7 @@
         </span>
       </slot>
       <UIcon v-if="icon" :name="icon" />
-      <label>
+      <label v-if="label">
         {{ label }}
       </label>
       <slot name="append">
@@ -60,11 +60,11 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const sizes = {
-  xl: 'h-10 px-3 gap-x-2 text-base',
-  lg: 'h-9 px-3 gap-x-2 text-sm',
-  md: 'h-8 px-2.5 gap-x-1.5 text-sm',
-  sm: 'h-7 px-2.5 gap-x-1.5 text-[0.8rem]',
-  xs: 'h-6 px-2 gap-x-1 text-xs',
+  xl: `h-10 gap-x-2 text-base ${!props.label && props.icon ? 'w-10' : 'px-3'}`,
+  lg: `h-9 gap-x-2 text-sm ${!props.label && props.icon ? 'w-9' : 'px-3'}`,
+  md: `h-8 gap-x-1.5 text-sm ${!props.label && props.icon ? 'w-8' : 'px-2.5'}`,
+  sm: `h-7 gap-x-1.5 text-[0.8rem] ${!props.label && props.icon ? 'w-7' : 'px-2.5'}`,
+  xs: `h-6 gap-x-1 text-xs ${!props.label && props.icon ? 'w-6' : 'px-2'}`,
 }
 
 const variants = {
